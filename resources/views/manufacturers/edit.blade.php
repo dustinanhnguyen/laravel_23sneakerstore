@@ -8,19 +8,20 @@
 </head>
 <body>
     <div>
-        <form action="{{route('manufacturer.create')}}" method="post">
+        <form action="{{route('manufacturer.update', $manufacturer)}}" method="post">
             @csrf
+            @method('PUT')
             <label for="">
                 <span>Name</span>
-                <input type="text" name="name" id="">
+                <input type="text" name="name" id="" value="{{$manufacturer->name}}">
             </label>
             <label for="">
                 <span>Short Name</span>
-                <input type="text" name="short_name" id="">
+                <input type="text" name="short_name" id="" value="{{$manufacturer->short_name}}">
             </label>
             <label for="">
                 <span>Image</span>
-                <input type="text" name="image" id="">
+                <input type="text" name="image" id="" value="{{$manufacturer->image}}">
             </label>
 
             <button>Submit</button>

@@ -13,6 +13,8 @@
                 <td>Name and Short Name</td>
                 <td>Image</td>
                 <td>Created At</td>
+                <td>Edit</td>
+                <td>Delete</td>
             </tr>
             @foreach ($manufacturers as $manufacturer)
                 <tr>
@@ -20,13 +22,23 @@
                     <td>{{ $manufacturer->full_name }}</td>
                     <td><img src="{{ $manufacturer->image }}" alt="" height="200" width="200"></td>
                     <td>{{ $manufacturer->created_at }}</td>
+                    <td>
+                        <a href="{{route('manufacturer.edit', $manufacturer)}}">Edit</a>
+                    </td>
+                    <td>
+                        <form action="{{route('manufacturer.destroy', $manufacturer)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button>Delete</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </table>
     </div>
 
     <div>
-        <a href="{{ route('create') }}">Add new Manufacturer</a>
+        <a href="{{ route('manufacturer.create') }}">Add new Manufacturer</a>
     </div>
 </body>
 </html>

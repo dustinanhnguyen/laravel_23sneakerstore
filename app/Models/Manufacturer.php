@@ -11,6 +11,12 @@ class Manufacturer extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'short_name',
+        'image',
+    ];
+
     // public $timestamps = false; // sd neu cot created_at va updated_at khong ton tai
 
     public function fullName():Attribute {
@@ -23,7 +29,7 @@ class Manufacturer extends Model
         return Attribute::make(
             get: function ($value, $attributes) {
                 $date = new DateTime($attributes['created_at']);
-                return $date->format('d-m-y');
+                return $date->format('d-m-Y');
             }
         );
     }

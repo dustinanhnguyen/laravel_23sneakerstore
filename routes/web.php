@@ -3,21 +3,11 @@
 use App\Http\Controllers\ManufacturerController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix'=>'manufacturers', 'as'=>'manufacturer.'], function() {
+    Route::get('/', [ManufacturerController::class, 'index'])->name('index');
+    Route::get('/create', [ManufacturerController::class, 'create'])->name('create');
+    Route::post('/create', [ManufacturerController::class, 'store'])->name('store');
+    Route::get('/edit/{manufacturer}', [ManufacturerController::class, 'edit'])->name('edit');
+    Route::put('/edit/{manufacturer}', [ManufacturerController::class, 'update'])->name('update');
+    Route::delete('/destroy/{manufacturer}', [ManufacturerController::class, 'destroy'])->name('destroy');
 });
-
-Route::get('/manufacturer', [ManufacturerController::class, 'index']);
-Route::get('/manufacturer/create', [ManufacturerController::class, 'create'])->name('create');
-Route::post('/manufacturer/create', [ManufacturerController::class, 'store'])->name('store');

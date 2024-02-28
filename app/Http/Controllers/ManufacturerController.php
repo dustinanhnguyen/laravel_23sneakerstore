@@ -20,9 +20,46 @@ class ManufacturerController extends Controller
 
     public function store(Request $request) {
         $manufacturer = new Manufacturer();
-        $manufacturer->name = $request->get('name');        
-        $manufacturer->short_name = $request->get('short_name');        
-        $manufacturer->image = $request->get('image');      
+        $manufacturer->fill($request->except([
+            '_token',
+        ]));
         $manufacturer->save(); 
+
+        // Manufacturer::create($request->except('_token'));
+
+        return redirect()->route('manufacturer.index');
     }
+
+    public function edit(Manufacturer $manufacturer) {
+        return view('manufacturers.edit', [
+            'manufacturer' => $manufacturer,
+        ]);
+    }
+
+    public function update(Request $request, Manufacturer $manufacturer) {
+        // Manufacturer::where('id', $manufacturer->id)
+        // ->update($request
+        // ->except([
+        //     '_token',
+        //     '_method',
+        // ]));
+
+        $manufacturer->update($request->except([
+            '_token',
+            '_method',
+        ]));
+
+        return redirect()->route('manufacturer.index');
+    }
+
+    public function destroy(Manufacturer $manufacturer) {
+        $manufacturer->delete();
+        return redirect()->route('manufacturer.index');
+    }
+
+    // public function destroy( $manufacturer) {
+    //     Manufacturer::destroy($manufacturer);   //Eloquent co the truyen mang ID vao de xoa
+
+    //     return redirect()->route('manufacturer.index');
+    // }
 }

@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
+    <div>
+        <form action="" method="get">
+            <label for="">
+                <span>Seach: </span>
+                <input type="text" name="search" id="" value="{{$search}}">
+            </label>
+            <button>Seacrh</button>
+        </form>
+    </div>
     <div>
         <table border="1" width="100%">
             <tr>
@@ -23,10 +34,10 @@
                     <td><img src="{{ $manufacturer->image }}" alt="" height="200" width="200"></td>
                     <td>{{ $manufacturer->created_at }}</td>
                     <td>
-                        <a href="{{route('manufacturer.edit', $manufacturer)}}">Edit</a>
+                        <a href="{{ route('manufacturer.edit', $manufacturer) }}">Edit</a>
                     </td>
                     <td>
-                        <form action="{{route('manufacturer.destroy', $manufacturer)}}" method="post">
+                        <form action="{{ route('manufacturer.destroy', $manufacturer) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <button>Delete</button>
@@ -40,5 +51,8 @@
     <div>
         <a href="{{ route('manufacturer.create') }}">Add new Manufacturer</a>
     </div>
+
+    {{ $manufacturers->links() }}
 </body>
+
 </html>
